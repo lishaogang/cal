@@ -73,7 +73,7 @@ class GExpression(BaseClass):
 		
 		#ln(E) left operator is e, right operator is E, opType is ln
 		if self.opType == 'ln':
-			return GExpressionWrapper(self.right.derivate(partial),self.left,'divide')
+			return GExpressionWrapper(self.right.derivate(partial),self.right,'divide')
 		#loga(E) left operator is a, right operator is E, opType is log	
 		if self.opType == 'log':
 			return GExpressionWrapper(self.right.derivate(partial),
@@ -125,8 +125,8 @@ class GExpression(BaseClass):
 		
 if __name__ == '__main__':
 	
-	a = Constant('e')
-	x = Variable('X',2)
+	a = Constant(2)
+	x = Variable('X')
 	x1 = Variable('X',3)
 	apx = GExpressionWrapper(a,x,'plus')
 	amx = GExpressionWrapper(a,x,'minus')
@@ -141,6 +141,7 @@ if __name__ == '__main__':
 	#print(apx.derivate(x).expression())
 	#print(amx.derivate(x).expression())
 	#print(x1dx.derivate(x).expression())
+	#print(xp2.right.value)
 	#print(xp2.derivate(x).expression())
 	
 		
@@ -157,7 +158,8 @@ if __name__ == '__main__':
         
     #sigmoid(x) = 1/(1+e^(-x))
 	#sigmoid(x)dx = (e^(-x))/(1+e^(-x))^2
-	
+	lnx = GExpressionWrapper(Constant(2),xp2,'ln')
+	print(lnx.derivate(x).expression())
 	print(sigmoid.derivate(x).expression())
 
 
