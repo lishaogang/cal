@@ -106,22 +106,22 @@ class GExpression(BaseClass):
 		r = self.right.expression() if self.right.type != 'EXPRESSION' else '(' +self.right.expression() + ')'
 		
 		if self.opType == 'plus':
-			return '('+ l + '+' + r +')'
+			return self.left.expression() + '+' + self.right.expression()
 		if self.opType == 'minus':
-			return '('+ l + '-' + r +')'
+			return self.left.expression() + '-' + self.right.expression()
 		if self.opType == 'multiple':
-			return '('+l + '*' + r +')'
+			return l + '*' + r
 		if self.opType == 'divide':
-			return '('+ l+ '/'+ r +')'
+			return l+ '/'+ r
 		if self.opType == '^':
-			return '('+ l + '^' + r +')'
+			return l + '^' + r
 		if self.opType == 'ln':
 			return 'ln' + r
 		if self.opType == 'log':
-			return 'log' + self.right.expression() + l
+			return 'log' + l + r
 			
 	def type(self):
-		return 'OPERATION'
+		return self.type
 		
 if __name__ == '__main__':
 	
